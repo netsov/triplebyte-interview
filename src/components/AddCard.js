@@ -3,16 +3,16 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { addCard } from '../redux/actions';
 
+import './AddCard.css';
+
 const AddCard = ({ addCard, column }) => {
   return (
     <div>
       <button
+        className="add-card"
         onClick={() => {
-          const title = prompt('Please enter your card name');
-
-          console.log(title);
-
-          addCard(title, column);
+          const cardTitle = prompt('Please enter your card name');
+          if (cardTitle) addCard(cardTitle, column.id);
         }}
       >
         Add Card

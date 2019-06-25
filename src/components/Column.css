@@ -1,5 +1,4 @@
 .column {
-    /*background-color: red;*/
     width: 100%;
     margin-right: 25px;
 }
@@ -8,33 +7,10 @@
     margin-left: 25px;
 }
 
-.column:last-child {
-    margin-right: 25px;
-}
-
-
 .column h4 {
-    /*background-color: azure;*/
     height: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
-}
-
-
-.headerA {
-    background-color: #8e6e95;
-}
-
-.headerB {
-    background-color: #39A59C;
-}
-
-.headerC {
-    background-color: #344759;
-}
-
-.headerD {
-    background-color: #E8741E;
 }

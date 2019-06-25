@@ -1,76 +1,43 @@
 import { combineReducers } from 'redux';
 import { ADD_CARD, UPDATE_CARD } from './actionTypes';
-import * as columns from '../columns';
+import { newCard, newColumn } from './utils';
 
-const initialState = getFromLocalStorage('cards') || [
-  {
-    title: 'foo',
-    column: columns.CARD_A
-  },
-  {
-    title: 'bar',
-    column: columns.CARD_A
-  },
+const COLUMN_A = newColumn('a', '#8e6e95');
+const COLUMN_B = newColumn('b', '#39A59C');
+const COLUMN_C = newColumn('c', '#344759');
+const COLUMN_D = newColumn('d', '#E8741E');
 
-  {
-    title: 'foo1',
-    column: columns.CARD_B
-  },
-  {
-    title: 'bar1',
-    column: columns.CARD_B
-  },
+const defaultColumns = [COLUMN_A, COLUMN_B, COLUMN_C, COLUMN_D];
 
-  {
-    title: 'foo2',
-    column: columns.CARD_C
-  },
-  {
-    title: 'bar2',
-    column: columns.CARD_C
-  },
+const defaultCards = [
+  newCard('foo1', COLUMN_A.id),
+  newCard('foo1', COLUMN_A.id),
 
-  {
-    title: 'foo3',
-    column: columns.CARD_D
-  },
-  {
-    title: 'bar3',
-    column: columns.CARD_D
-  }
+  newCard('foo2', COLUMN_B.id),
+  newCard('foo2', COLUMN_B.id),
+
+  newCard('foowr', COLUMN_C.id),
+  newCard('foowervewr', COLUMN_C.id),
+
+  newCard('ewrv', COLUMN_D.id),
+  newCard('wervrv', COLUMN_D.id)
 ];
 
-function newCard({ title, column }) {
-  return {
-    title,
-    column
-  };
-}
-
-function saveToLocalStorage(cards) {
-  localStorage.setItem('cards', JSON.stringify(cards));
-}
-function getFromLocalStorage(key) {
-  const value = localStorage.getItem(key);
-  return value && JSON.parse(value);
-}
-
-function cards(state = initialState, action) {
+function cards(state = defaultCards, action) {
   switch (action.type) {
     case ADD_CARD:
-      const newState1 = [...state, newCard(action.payload)];
-      saveToLocalStorage(newState1);
-      return newState1;
+      return [...state, action.payload];
     case UPDATE_CARD:
-      const newState2 = state.map(
-        card => (card.title === action.payload.title ? action.payload : card)
+      return state.map(
+        card => (card.id === action.payload.id ? action.payload : card)
       );
-      saveToLocalStorage(newState2);
-
-      return newState2;
     default:
       return state;
   }
 }
 
-export default combineReducers({ cards });
+function columns(state = defaultColumns) {
+  return state;
+}
+
+export default combineReducers({ cards, columns });

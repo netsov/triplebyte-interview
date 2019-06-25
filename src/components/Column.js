@@ -1,20 +1,44 @@
 import React from 'react';
 
 import './Column.css';
-import * as column from '../columns';
+import { connect } from 'react-redux';
+import Card from './Card';
+import AddCard from './AddCard';
 
-const headerClasses = {
-  [column.CARD_A]: 'headerA',
-  [column.CARD_B]: 'headerB',
-  [column.CARD_C]: 'headerC',
-  [column.CARD_D]: 'headerD'
-};
-
-export const Column = ({ name, children }) => {
+const Column = ({ column, cards, showLeft, showRight }) => {
   return (
     <div className="column">
-      <h4 className={headerClasses[name]}>{name}</h4>
-      <div>{children}</div>
+      <h4 style={{ backgroundColor: column.backgroundColor }}>
+        {column.title}
+      </h4>
+      <div>
+        {cards.map(card => (
+          <Card
+            key={card.id}
+            card={card}
+            showLeft={showLeft}
+            showRight={showRight}
+          />
+        ))}
+        <AddCard column={column} />
+      </div>
     </div>
   );
 };
+
+function isFirstColumn(column, columns) {
+  return columns.findIndex(c => c.id === column.id) === 0;
+}
+function isLastColumn(column, columns) {
+  return columns.findIndex(c => c.id === column.id) === columns.length - 1;
+}
+
+function mapStateToProps(state, props) {
+  return {
+    cards: state.cards.filter(card => card.column === props.column.id),
+    showLeft: !isFirstColumn(props.column, state.columns),
+    showRight: !isLastColumn(props.column, state.columns)
+  };
+}
+
+export default connect(mapStateToProps)(Column);

@@ -3,4 +3,31 @@
     background-color: white;
     margin-bottom: 12px;
     padding: 14px 8px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.card button {
+    position: absolute;
+    margin: 0 5px;
+}
+
+.card button:first-child {
+    left: 0;
+}
+.card button:last-child {
+    right: 0;
+}
+
+.card button {
+    display: block;
+    width: 30px;
+    height: 30px;
+    border: none;
+    background-color: #fff;
+    font-size: large;
+    cursor: pointer;
 }
