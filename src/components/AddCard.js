@@ -6,15 +6,13 @@ import { addCard } from '../redux/actions';
 import './AddCard.css';
 
 const AddCard = ({ addCard, column }) => {
+  const add = () => {
+    const cardTitle = prompt('Please enter your card name');
+    if (cardTitle) addCard(cardTitle, column.id);
+  };
   return (
     <div>
-      <button
-        className="add-card"
-        onClick={() => {
-          const cardTitle = prompt('Please enter your card name');
-          if (cardTitle) addCard(cardTitle, column.id);
-        }}
-      >
+      <button className="add-card" onClick={add}>
         Add Card
       </button>
     </div>
