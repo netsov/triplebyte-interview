@@ -28,7 +28,7 @@ class AddCard extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     const { addCard, column } = this.props;
-    addCard(this.state.input, column.id);
+    addCard(this.state.input, column._id);
     this.closeModal();
   };
 

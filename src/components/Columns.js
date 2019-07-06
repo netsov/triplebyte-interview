@@ -12,7 +12,7 @@ class Columns extends React.Component {
     const { columns } = this.props;
     return (
       <main>
-        {columns.map(column => <Column key={column.id} column={column} />)}
+        {columns.map(column => <Column key={column._id} column={column} />)}
       </main>
     );
   }

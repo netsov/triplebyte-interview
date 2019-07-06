@@ -1,16 +1,13 @@
-import uuid from 'uuid/v4';
-
 export function newCard(title, column) {
   return {
-    id: uuid(),
     title,
     column
   };
 }
 
-export function newColumn(title, backgroundColor) {
+export function newColumn(title, backgroundColor, _id) {
   return {
-    id: uuid(),
+    _id,
     title,
     backgroundColor
   };

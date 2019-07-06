@@ -14,7 +14,7 @@ const Column = ({ column, cards, showLeft, showRight }) => {
       <div>
         {cards.map(card => (
           <Card
-            key={card.id}
+            key={card._id}
             card={card}
             showLeft={showLeft}
             showRight={showRight}
@@ -27,15 +27,15 @@ const Column = ({ column, cards, showLeft, showRight }) => {
 };
 
 function isFirstColumn(column, columns) {
-  return columns.findIndex(c => c.id === column.id) === 0;
+  return columns.findIndex(c => c._id === column._id) === 0;
 }
 function isLastColumn(column, columns) {
-  return columns.findIndex(c => c.id === column.id) === columns.length - 1;
+  return columns.findIndex(c => c._id === column._id) === columns.length - 1;
 }
 
 function mapStateToProps(state, props) {
   return {
-    cards: state.cards.filter(card => card.column === props.column.id),
+    cards: state.cards.filter(card => card.column === props.column._id),
     showLeft: !isFirstColumn(props.column, state.columns),
     showRight: !isLastColumn(props.column, state.columns)
   };
