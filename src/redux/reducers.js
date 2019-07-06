@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { ADD_CARD, UPDATE_CARD } from './actionTypes';
+import { ADD_CARD, FETCH_CARDS, UPDATE_CARD } from './actionTypes';
 import { newCard, newColumn } from './utils';
 
 const COLUMN_A = newColumn('a', '#8e6e95');
@@ -23,8 +23,10 @@ const defaultCards = [
   newCard('wervrv', COLUMN_D.id)
 ];
 
-function cards(state = defaultCards, action) {
+function cards(state = [], action) {
   switch (action.type) {
+    case FETCH_CARDS:
+      return action.payload;
     case ADD_CARD:
       return [...state, action.payload];
     case UPDATE_CARD:

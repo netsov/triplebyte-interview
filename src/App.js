@@ -6,11 +6,9 @@ import { store } from './redux/store';
 import Columns from './components/Columns';
 
 const App = () => (
-  <main className="">
-    <Provider store={store}>
-      <Columns />
-    </Provider>
-  </main>
+  <Provider store={store}>
+    <Columns />
+  </Provider>
 );
 
 export default App;
