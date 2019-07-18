@@ -7,9 +7,10 @@ import './AddCard.css';
 
 class AddCard extends React.Component {
   state = {
-    modalIsOpen: false,
-    input: ''
+    modalIsOpen: false
   };
+
+  ref = React.createRef();
 
   handleEscape = e => {
     if (e.key === 'Escape') this.closeModal();
@@ -21,41 +22,32 @@ class AddCard extends React.Component {
   };
 
   closeModal = () => {
-    this.setState({ modalIsOpen: false, input: '' });
+    this.setState({ modalIsOpen: false });
     document.removeEventListener('keydown', this.handleEscape);
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    const { addCard, column } = this.props;
-    addCard(this.state.input, column._id);
+    this.props.addCard(this.ref.current.value, this.props.column._id);
     this.closeModal();
   };
-
-  handleChange = e => this.setState({ input: e.target.value });
 
   renderModal = () => {
     return (
       <div className="modal">
         <div id="result" className="modal-content">
           <h3>Add Card</h3>
-          <form>
+          <form onSubmit={this.handleSubmit}>
             <input
               type="text"
               placeholder="Please enter your card name"
-              value={this.state.input}
-              onChange={this.handleChange}
+              ref={this.ref}
               autoFocus
+              required
             />
             <div className="actions">
               <button onClick={this.closeModal}>Cancel</button>
-              <button
-                type="submit"
-                onClick={this.handleSubmit}
-                disabled={!this.state.input}
-              >
-                Submit
-              </button>
+              <button type="submit">Submit</button>
             </div>
           </form>
         </div>
